@@ -1,0 +1,180 @@
+.section {
+  background: #f8f9fa;
+}
+
+/* Banner */
+.banner {
+  background: linear-gradient(135deg, #1a73e8, #1557b0);
+  border-radius: 16px;
+  padding: 40px 36px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  margin-bottom: 24px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.bannerContent { flex: 1; position: relative; z-index: 1; }
+
+.bannerTitle {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 12px;
+  line-height: 1.25;
+}
+
+.bannerDesc {
+  font-size: 0.92rem;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.65;
+  margin-bottom: 24px;
+  max-width: 50ch;
+}
+
+.bannerVisual {
+  flex-shrink: 0;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mathSymbol {
+  font-size: 3rem;
+  color: rgba(255,255,255,0.3);
+  font-weight: 700;
+}
+
+/* Grid */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.card {
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.cardTitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.reqList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.reqItem {
+  display: flex;
+  gap: 10px;
+  font-size: 0.88rem;
+  color: #495057;
+  line-height: 1.5;
+}
+
+.check {
+  color: #1e8e3e;
+  font-weight: 700;
+  flex-shrink: 0;
+  font-size: 0.82rem;
+}
+
+.areaList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.areaItem {
+  font-size: 0.88rem;
+  color: #495057;
+  padding: 8px 14px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 3px solid #1a73e8;
+  line-height: 1.45;
+}
+
+/* Students */
+.studentsBlock {
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.studentsTitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.studentsCols {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 32px;
+}
+
+.colLabel {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #868e96;
+  margin-bottom: 10px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table tr {
+  border-bottom: 1px solid #f8f9fa;
+}
+
+.table tr:last-child { border-bottom: none; }
+
+.tdName {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1a1a2e;
+  padding: 8px 12px 8px 0;
+  white-space: nowrap;
+}
+
+.tdArea {
+  font-size: 0.82rem;
+  color: #868e96;
+  padding: 8px 0;
+}
+
+@media (max-width: 768px) {
+  .banner { flex-direction: column; text-align: center; padding: 32px 24px; }
+  .bannerVisual { display: none; }
+  .bannerDesc { margin-left: auto; margin-right: auto; }
+  .grid { grid-template-columns: 1fr; }
+  .studentsCols { grid-template-columns: 1fr; gap: 24px; }
+}
