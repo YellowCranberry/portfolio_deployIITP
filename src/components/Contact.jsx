@@ -24,10 +24,10 @@ export default function Contact() {
             <div className={styles.cardLabel}>Personal Website</div>
             <div className={styles.cardValue}>iitp.ac.in/~pksri/</div>
           </a>
-          <a href={faculty.iitpProfile} target="_blank" rel="noopener noreferrer" className={styles.card}>
-            <div className={styles.icon}>🏛️</div>
-            <div className={styles.cardLabel}>IIT Patna Profile</div>
-            <div className={styles.cardValue}>Official Faculty Directory</div>
+          <a href={faculty.scholarProfile} target="_blank" rel="noopener noreferrer" className={styles.card}>
+            <div className={styles.icon}>📚</div>
+            <div className={styles.cardLabel}>Google Scholar</div>
+            <div className={styles.cardValue}>Citation profile & publications</div>
           </a>
         </div>
       </div>

@@ -30,6 +30,7 @@ function renderText(text) {
 
 export default function Chatbot() {
   const [open, setOpen] = useState(false);
+  const [showTeaser, setShowTeaser] = useState(false);
   const [messages, setMessages] = useState([
     { role: 'bot', text: chatbotData.greetings[0] }
   ]);
@@ -40,6 +41,23 @@ export default function Chatbot() {
 
   useEffect(() => { endRef.current?.scrollIntoView({ behavior: 'smooth' }); }, [messages, typing]);
   useEffect(() => { if (open) inputRef.current?.focus(); }, [open]);
+
+  useEffect(() => {
+    if (sessionStorage.getItem('chatbot-teaser-dismissed')) return;
+    const timer = setTimeout(() => setShowTeaser(true), 2500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const dismissTeaser = () => {
+    setShowTeaser(false);
+    sessionStorage.setItem('chatbot-teaser-dismissed', '1');
+  };
+
+  const toggleOpen = () => {
+    setShowTeaser(false);
+    sessionStorage.setItem('chatbot-teaser-dismissed', '1');
+    setOpen(prev => !prev);
+  };
 
   const send = (text) => {
     const q = (text || input).trim();
@@ -54,14 +72,35 @@ export default function Chatbot() {
   };
 
   return (
-    <>
+    <div className={styles.widget}>
+      {showTeaser && !open && (
+        <div className={styles.teaser} role="status">
+          <button type="button" className={styles.teaserDismiss} onClick={dismissTeaser} aria-label="Dismiss">×</button>
+          <div className={styles.teaserIcon} aria-hidden="true">∑</div>
+          <div className={styles.teaserBody}>
+            <strong className={styles.teaserTitle}>Academic Assistant</strong>
+            <p className={styles.teaserText}>Ask about research, publications, PhD opportunities & more.</p>
+            <button type="button" className={styles.teaserCta} onClick={toggleOpen}>
+              Start chatting →
+            </button>
+          </div>
+        </div>
+      )}
+
       <button
-        className={`${styles.fab} ${open ? styles.fabOpen : ''}`}
-        onClick={() => setOpen(!open)}
+        className={`${styles.fab} ${open ? styles.fabOpen : ''} ${showTeaser && !open ? styles.fabPulse : ''}`}
+        onClick={toggleOpen}
         aria-label={open ? 'Close assistant' : 'Open academic assistant'}
         aria-expanded={open}
       >
-        {open ? '✕' : '💬'}
+        {open ? (
+          <span className={styles.fabClose}>✕</span>
+        ) : (
+          <>
+            <span className={styles.fabIcon} aria-hidden="true">∑</span>
+            <span className={styles.fabLabel}>Ask Assistant</span>
+          </>
+        )}
       </button>
 
       {open && (
@@ -121,6 +160,6 @@ export default function Chatbot() {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }

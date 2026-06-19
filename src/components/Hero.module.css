@@ -7,12 +7,35 @@
   overflow: hidden;
 }
 
+.meshBg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 60% at 10% 20%, rgba(230, 126, 34, 0.08), transparent 50%),
+    radial-gradient(ellipse 70% 50% at 90% 30%, rgba(30, 58, 95, 0.07), transparent 50%),
+    radial-gradient(ellipse 60% 40% at 50% 90%, rgba(39, 174, 96, 0.05), transparent 50%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .meshBg {
+    animation: meshShift 18s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes meshShift {
+  from { opacity: 0.85; transform: scale(1); }
+  to { opacity: 1; transform: scale(1.03); }
+}
+
 .content {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
   gap: 60px;
   align-items: center;
   width: 100%;
+  position: relative;
+  z-index: 1;
 }
 
 .textContent {
@@ -25,8 +48,8 @@
 .badge {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 16px;
+  gap: 10px;
+  padding: 6px 16px 6px 8px;
   background: white;
   border: 1px solid #e5e7eb;
   border-radius: 100px;
@@ -34,7 +57,22 @@
   font-weight: 500;
   color: #4b5563;
   margin-bottom: 32px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.badge:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  color: #374151;
+}
+
+.badgeLogo {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
 
 .name {
@@ -42,7 +80,7 @@
   font-weight: 700;
   color: #111827;
   line-height: 1.1;
-  letter-spacing: -0.04em; /* Tight tracking like the image */
+  letter-spacing: -0.04em;
   margin-bottom: 12px;
 }
 
@@ -64,25 +102,30 @@
 
 .actions {
   display: flex;
-  gap: 16px;
-  margin-bottom: 48px;
+  gap: 12px;
+  margin-bottom: 40px;
   flex-wrap: wrap;
 }
 
-.btnPrimary {
+.btnPrimary,
+.btnOutline {
   padding: 14px 28px;
   font-size: 1rem;
 }
 
 .btnOutline {
-  padding: 14px 28px;
-  font-size: 1rem;
   background: white;
+}
+
+.btnScholar {
+  padding: 14px 20px;
+  font-size: 0.95rem;
 }
 
 .stats {
   display: flex;
   gap: 32px;
+  margin-bottom: 28px;
 }
 
 .stat {
@@ -96,6 +139,7 @@
   color: #111827;
   letter-spacing: -0.02em;
   margin-bottom: 2px;
+  font-variant-numeric: tabular-nums;
 }
 
 .statLabel {
@@ -106,7 +150,22 @@
   letter-spacing: 0.05em;
 }
 
-/* Image section */
+.keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.keyword {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: #6b7280;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid #e5e7eb;
+  padding: 5px 12px;
+  border-radius: 100px;
+}
+
 .imageContent {
   position: relative;
   display: flex;
@@ -124,7 +183,7 @@
   background: white;
   border: 1px solid #e5e7eb;
   padding: 12px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
   transform: rotate(2deg);
   transition: transform 0.3s ease;
 }
@@ -149,7 +208,7 @@
   padding: 16px 20px;
   border-radius: 16px;
   border: 1px solid #e5e7eb;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .cardHeader {
@@ -203,6 +262,9 @@
   .stats {
     justify-content: center;
   }
+  .keywords {
+    justify-content: center;
+  }
   .imageWrapper {
     transform: rotate(0deg);
   }
@@ -211,5 +273,9 @@
     transform: translateX(-50%);
     bottom: -24px;
     width: max-content;
+  }
+  .badgeLogo {
+    width: 32px;
+    height: 32px;
   }
 }

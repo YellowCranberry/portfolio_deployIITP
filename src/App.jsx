@@ -5,6 +5,7 @@ import Nav from './components/Nav';
 import Hero from './components/Hero';
 import About from './components/About';
 import Research from './components/Research';
+import ScholarImpact from './components/ScholarImpact';
 import Publications from './components/Publications';
 import PhD from './components/PhD';
 import Contact from './components/Contact';
@@ -44,6 +45,7 @@ function App() {
         <Hero />
         <div className="reveal"><About /></div>
         <div className="reveal"><Research /></div>
+        <div className="reveal"><ScholarImpact /></div>
         <div className="reveal"><Publications /></div>
         <div className="reveal"><PhD /></div>
         <div className="reveal"><Contact /></div>
