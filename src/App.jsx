@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import './index.css';
+import { NavigationProvider } from './context/NavigationContext';
 import SkeletonLoader from './components/Skeleton';
 import Nav from './components/Nav';
 import Hero from './components/Hero';
@@ -39,7 +40,7 @@ function App() {
   if (!loaded) return <SkeletonLoader />;
 
   return (
-    <>
+    <NavigationProvider>
       <Nav />
       <main>
         <Hero />
@@ -52,7 +53,7 @@ function App() {
       </main>
       <Footer />
       <Chatbot />
-    </>
+    </NavigationProvider>
   );
 }
 

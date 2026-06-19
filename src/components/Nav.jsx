@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigation } from '../context/NavigationContext';
 import styles from './Nav.module.css';
 
 const links = [
@@ -9,6 +10,7 @@ const links = [
 ];
 
 export default function Nav() {
+  const { navigateToSection } = useNavigation();
   const [scrolled, setScrolled] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
@@ -18,10 +20,7 @@ export default function Nav() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const go = (e, href) => {
-    e.preventDefault();
-    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
-  };
+  const go = (e, href) => navigateToSection(href, e);
 
   return (
     <>
@@ -33,7 +32,7 @@ export default function Nav() {
           </a>
           <div className={styles.divider} />
           <ul className={styles.links}>
-            {links.map((l, idx) => (
+            {links.map(l => (
               <li key={l.href}>
                 <a href={l.href} className={styles.link} onClick={(e) => go(e, l.href)}>{l.label}</a>
               </li>
@@ -49,7 +48,7 @@ export default function Nav() {
       {/* Mobile Floating Dock */}
       <nav className={styles.floatingDock} aria-label="Mobile navigation">
         <ul className={styles.dockList}>
-          <li 
+          <li
             className={styles.dockItem}
             onMouseEnter={() => setHoveredIndex(-1)}
             onMouseLeave={() => setHoveredIndex(null)}
@@ -62,8 +61,8 @@ export default function Nav() {
             {hoveredIndex === -1 && <span className={styles.tooltip}>Home</span>}
           </li>
           {links.map((l, idx) => (
-            <li 
-              key={l.href} 
+            <li
+              key={l.href}
               className={styles.dockItem}
               onMouseEnter={() => setHoveredIndex(idx)}
               onMouseLeave={() => setHoveredIndex(null)}

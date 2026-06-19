@@ -1,0 +1,136 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: all;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.enter .backdrop,
+.morph .backdrop,
+.title .backdrop,
+.scroll .backdrop {
+  opacity: 1;
+}
+
+.exit .backdrop {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.stage {
+  position: relative;
+  z-index: 1;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+}
+
+.formulaLayer,
+.titleLayer {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition:
+    opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    filter 0.45s ease;
+}
+
+.formulaLayer {
+  opacity: 0;
+  transform: scale(0.88) translateY(8px);
+  filter: blur(4px);
+}
+
+.enter .formulaLayer {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  filter: blur(0);
+}
+
+.formulaOut {
+  opacity: 0 !important;
+  transform: scale(1.06) translateY(-10px) !important;
+  filter: blur(6px) !important;
+}
+
+.titleLayer {
+  opacity: 0;
+  transform: scale(0.94) translateY(12px);
+  filter: blur(4px);
+}
+
+.titleIn {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  filter: blur(0);
+}
+
+.titleOut {
+  opacity: 0 !important;
+  transform: scale(1.04) translateY(-8px) !important;
+  filter: blur(4px) !important;
+}
+
+.formulaText {
+  font-family: 'Georgia', 'Times New Roman', 'Cambria Math', serif;
+  font-size: clamp(2rem, 6vw, 3.2rem);
+  font-weight: 400;
+  font-style: italic;
+  color: #1e3a5f;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+
+.formulaText sup {
+  font-size: 0.55em;
+  font-style: normal;
+}
+
+.titleText {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: clamp(1.75rem, 5vw, 2.75rem);
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.decorLine {
+  position: absolute;
+  bottom: -28px;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 64px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #1e3a5f, transparent);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+}
+
+.title .decorLine,
+.scroll .decorLine {
+  transform: translateX(-50%) scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay {
+    display: none;
+  }
+}

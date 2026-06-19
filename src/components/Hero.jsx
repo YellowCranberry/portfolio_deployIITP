@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { faculty } from '../data/facultyData';
 import { scholarMetrics, publicationCount } from '../data/publicationsData';
+import { useNavigation } from '../context/NavigationContext';
 import styles from './Hero.module.css';
 
 const IITP_LOGO = '/iitp-logo.svg';
@@ -23,6 +24,7 @@ function useCountUp(target, duration = 1200, active = false) {
 }
 
 export default function Hero() {
+  const { navigateToSection } = useNavigation();
   const statsRef = useRef(null);
   const badgeRef = useRef(null);
   const [statsVisible, setStatsVisible] = useState(false);
@@ -81,10 +83,10 @@ export default function Hero() {
           <p className={styles.bio}>{faculty.bio}</p>
 
           <div className={styles.actions}>
-            <button type="button" className={`btn btn-primary ${styles.btnPrimary}`} onClick={() => document.getElementById('phd')?.scrollIntoView({ behavior: 'smooth' })}>
+            <button type="button" className={`btn btn-primary ${styles.btnPrimary}`} onClick={() => navigateToSection('#phd')}>
               PhD Opportunities &rarr;
             </button>
-            <button type="button" className={`btn btn-outline ${styles.btnOutline}`} onClick={() => document.getElementById('publications')?.scrollIntoView({ behavior: 'smooth' })}>
+            <button type="button" className={`btn btn-outline ${styles.btnOutline}`} onClick={() => navigateToSection('#publications')}>
               View Publications
             </button>
             <a href={scholarMetrics.profileUrl} target="_blank" rel="noopener noreferrer" className={`btn btn-ghost ${styles.btnScholar}`}>
